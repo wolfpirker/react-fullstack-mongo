@@ -38,6 +38,13 @@ app.post('/api/addcar', (req, res) => {
     })
 })
 
+app.get('/api/getcars', (req, res) => {
+    Car.findById('61de13ae65f8ee4ca3b69435', (err, doc) => {
+        if (err) return console.log(err)
+        console.log(doc)
+        res.json([doc])
+    })
+})
 
 const port = process.env.PORT || 3001;
 app.listen(port)

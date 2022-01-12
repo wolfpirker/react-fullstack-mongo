@@ -3,6 +3,17 @@ import axios from 'axios';
 
 class App extends Component {
 
+  state = {
+    cars: []
+  }
+
+  componentDidMount() {
+    axios.get('/api/getcars')
+      .then(response => {
+        this.setState({ cars: response.data })
+      })
+  }
+
   onSubmitCar() {
     axios.post('/api/addcar', {
       brand: 'Ford',
@@ -24,6 +35,10 @@ class App extends Component {
         >
           Add car
         </button>
+        {this.state.cars.map((car) => (
+          <div> - {car.brand}</div>
+        ))
+        }
       </div>
     )
   }
