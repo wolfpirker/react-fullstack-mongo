@@ -39,10 +39,18 @@ app.post('/api/addcar', (req, res) => {
 })
 
 app.get('/api/getcars', (req, res) => {
-    Car.findById('61de13ae65f8ee4ca3b69435', (err, doc) => {
+    Car.find({}, (err, doc) => {
         if (err) return console.log(err)
-        console.log(doc)
-        res.json([doc])
+        res.json(doc)
+    })
+})
+
+
+app.post('/api/removeCar', (req, res) => {
+    const brand = req.body.brand;
+    Car.remove({}, (err, doc) => {
+        if (err) return console.log(err);
+        res.json(doc)
     })
 })
 

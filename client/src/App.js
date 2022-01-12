@@ -8,9 +8,23 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getCars()
+  }
+
+
+  getCars = () => {
     axios.get('/api/getcars')
       .then(response => {
         this.setState({ cars: response.data })
+      })
+  }
+
+  onCarRemove = () => {
+    axios.post('/api/removeCar', {
+      brand: 'Ford'
+    })
+      .then(response => {
+        this.getCars();
       })
   }
 
@@ -35,6 +49,12 @@ class App extends Component {
         >
           Add car
         </button>
+        <button
+          onClick={() => this.onCarRemove()}
+        >
+          Remove car
+        </button>
+        <hr />
         {this.state.cars.map((car) => (
           <div> - {car.brand}</div>
         ))
