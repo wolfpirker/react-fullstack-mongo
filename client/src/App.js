@@ -28,6 +28,16 @@ class App extends Component {
       })
   }
 
+  onCarUpdate = () => {
+    axios.post('/api/updateCar', {
+      id: '5fd59708ddf9aa082b90247c',
+      brand: 'Mazda'
+    })
+      .then(response => {
+        this.getCars();
+      })
+  }
+
   onSubmitCar() {
     axios.post('/api/addcar', {
       brand: 'Ford',
@@ -39,7 +49,6 @@ class App extends Component {
         console.log(response.data)
       })
   }
-
 
   render() {
     return (
@@ -53,6 +62,11 @@ class App extends Component {
           onClick={() => this.onCarRemove()}
         >
           Remove car
+        </button>
+        <button
+          onClick={() => this.onCarUpdate()}
+        >
+          Update car
         </button>
         <hr />
         {this.state.cars.map((car) => (
